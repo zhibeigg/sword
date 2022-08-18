@@ -20,6 +20,7 @@ object Getsword {
                     val damage = attack.finalDamage
                     attack.damage = level + damage
                     sword.say("§6纸杯龙剑：§a" + player + "§b使用成长型武器对§c" + attack.entity.name + "§b造成了§4" + attack.finalDamage + "§4伤害")
+                    attack.damager.sendMessage(sword.config.getString("龙剑伤害信息"+attack.finalDamage))
                 }
             }
         }
