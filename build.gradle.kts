@@ -31,7 +31,8 @@ taboolib {
             name("纸杯")
         }
         dependencies {
-            name("PlaceholderAPI").optional(true)
+            name("GermPlugin").optional(true)
+            name("DungeonPlus").optional(true)
             name("Chemdah").optional(true)
             name("Planners").optional(true)
             name("OriginAttribute").optional(true)
