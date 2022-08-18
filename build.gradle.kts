@@ -25,6 +25,18 @@ taboolib {
     install("platform-bukkit")
     classifier = null
     version = "6.0.9-64"
+
+    description {
+        contributors {
+            name("纸杯")
+        }
+        dependencies {
+            name("PlaceholderAPI").optional(true)
+            name("Chemdah").optional(true)
+            name("Planners").optional(true)
+            name("OriginAttribute").optional(true)
+        }
+    }
 }
 
 repositories {
@@ -38,6 +50,7 @@ dependencies {
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
 }
+
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
