@@ -2,19 +2,17 @@ package com.github.sword
 
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
-import org.bukkit.configuration.Configuration
 import taboolib.common.platform.Plugin
 import taboolib.common.platform.function.info
 import taboolib.module.configuration.Config
+import taboolib.module.configuration.Configuration
 
 object sword : Plugin() {
 
-    @Config("config.yml")
+    @Config("config.yml", migrate = true)
     lateinit var config: Configuration
 
     override fun onEnable() {
-
-        config.getConfigurationSection("1")
         info("Sword!启动成功！by.zhi_bei")
     }
 
