@@ -11,3 +11,8 @@ magma: 0
 touch: 0
 #是否取消龙蛋传送
 dragon-egg: true
+#背景音乐世界
+music-world:
+  - "qyc"
+music:
+  - "炁源村"
