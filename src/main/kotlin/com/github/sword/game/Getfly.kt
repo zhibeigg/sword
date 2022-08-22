@@ -2,7 +2,6 @@ package com.github.sword.game
 
 import com.germ.germplugin.api.GermPacketAPI
 import com.germ.germplugin.api.SoundType
-import com.germ.germplugin.api.SoundType.getSoundTypeFromType
 import com.github.sword.sword
 import com.github.sword.sword.config
 import org.bukkit.event.player.PlayerChangedWorldEvent
