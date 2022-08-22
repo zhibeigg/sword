@@ -20,7 +20,7 @@ object Getfly {
     @SubscribeEvent
     fun m(e: PlayerChangedWorldEvent) {
         for (i in config.getStringList("music-world").indices)
-            if (e.from.name == config.getStringList("music-world").get(i)) {
+            if (e.player.world.name == config.getStringList("music-world")[i]) {
                 GermPacketAPI.playSound(/* player = */
                     e.player,
                     /* soundName = */

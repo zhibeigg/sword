@@ -6,6 +6,7 @@ import org.bukkit.Material
 import org.bukkit.entity.EntityType
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import taboolib.common.platform.event.SubscribeEvent
+import taboolib.platform.util.hasName
 
 object Getsword {
     @SubscribeEvent
@@ -14,7 +15,7 @@ object Getsword {
             val player = attack.damager.name
             val inv = Bukkit.getPlayer(player)!!.inventory
             val level = Bukkit.getPlayer(player)!!.level
-            if (inv.itemInMainHand.type != Material.AIR) {
+            if (inv.itemInMainHand.hasName()) {
                 val yl = inv.itemInMainHand.itemMeta!!.displayName
                 if (yl == sword.config.getString("成长型武器名")) {
                     val damage = attack.finalDamage
