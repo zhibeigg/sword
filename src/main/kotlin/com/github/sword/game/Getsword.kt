@@ -1,13 +1,9 @@
 package com.github.sword.game
 
-import ac.github.oa.OriginAttribute
-import ac.github.oa.api.OriginAttributeAPI
 import ac.github.oa.api.event.entity.EntityDamageEvent
 import com.github.sword.sword
 import org.bukkit.Bukkit
-import org.bukkit.Material
 import org.bukkit.entity.EntityType
-import org.bukkit.event.entity.EntityDamageByEntityEvent
 import taboolib.common.platform.event.SubscribeEvent
 import taboolib.platform.util.hasName
 
