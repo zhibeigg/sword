@@ -1,6 +1,7 @@
 package com.github.sword.game
 
 import com.germ.germplugin.api.GermPacketAPI
+import com.germ.germplugin.api.SoundType
 import com.germ.germplugin.api.SoundType.getSoundTypeFromType
 import com.github.sword.sword
 import com.github.sword.sword.config
@@ -19,28 +20,31 @@ object Getfly {
     }
     @SubscribeEvent
     fun m(e: PlayerChangedWorldEvent) {
-        for (i in config.getStringList("music-world").indices)
-            if (e.player.world.name == config.getStringList("music-world")[i]) {
-                GermPacketAPI.playSound(/* player = */
+        for (i in config.getStringList("title").indices) {
+            if (e.player.world.name == config.getStringList("title")[i]) {
+                e.player.sendTitle(
+                    config.getStringList(e.player.world.name)[0],
+                    config.getString("subtitle"),
+                    config.getInt("in"),
+                    config.getInt("on"),
+                    config.getInt("out")
+                )
+        }
+        }
+        for (i in config.getStringList("music").indices) {
+            if (e.player.world.name == config.getStringList("music")[i])
+                GermPacketAPI.playSound(
                     e.player,
-                    /* soundName = */
-                    config.getString("music")?.get(i).toString(),
-                    /* soundType = */
-                    getSoundTypeFromType("ambient"),
-                    /* x = */
-                    0F,
-                    /* volume = */
-                    0F,
-                    /* z = */
-                    0F,
-                    /* delayTick = */
+                    config.getStringList(e.player.world.name)[1],
+                    SoundType.AMBIENT,
+                    0f,
+                    0f,
+                    0f,
                     0,
-                    /* p7 = */
-                    1F,
-                    /* pitch = */
-                    1F,
-                    /* cycle = */
-                    true)
-            }
+                    1f,
+                    1f,
+                    true
+                )
+        }
     }
 }

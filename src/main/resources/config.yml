@@ -1,5 +1,5 @@
 成长型武器名: "§b§l⚝§d§l樱龙剑§b§l⚝"
-龙剑伤害信息: "§7[§c系统§7] §e造成伤害"
+龙剑伤害信息: "§7[§c系统§7] §e樱龙剑激活 §c体术攻击+"
 #死亡信息世界名
 world:
   - "fb3"
@@ -12,7 +12,18 @@ touch: 0
 #是否取消龙蛋传送
 dragon-egg: true
 #背景音乐世界
-music-world:
-  - "qyc"
 music:
+  - "qyc"
+#传送显示title的世界
+title:
+  - "qyc"
+#显示的副标题
+subtitle: ""
+#渐入 显示 渐出
+in: 10
+on: 10
+out: 10
+#世界列表 第一排是title 第二排是music
+qyc:
+  - "§6炁源村"
   - "炁源村"
