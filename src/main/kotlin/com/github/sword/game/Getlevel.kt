@@ -16,7 +16,7 @@ object Getlevel {
         val config = sword.config
         sword.say("§c玩家" + name + "死在了" + b)
         for (i in config.getStringList("world").indices) {
-            if (b == config.getStringList("world").get(i)) {
+            if (b == config.getStringList("world")[i]) {
                 player.sendMessage(config.getString("message"))
             }
         }
