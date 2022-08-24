@@ -17,12 +17,13 @@ object Stopegg {
 
     @SubscribeEvent
     fun m(e: PlayerInteractEvent) {
-        if (e.clickedBlock!!.blockData.material == DRAGON_EGG) {
-            val player = e.player
-            player.sendMessage("§7[§4系统§7]§c管住自己的手")
-            player.playSound(player, Sound.ENTITY_ENDER_DRAGON_AMBIENT, 1F, 1F)
-            player.addPotionEffect(PotionEffect(BLINDNESS, 20, 5))
-            player.location.world!!.strikeLightning(player.location)
+        if (e.hasBlock() && !e.isBlockInHand ) {
+            if (e.clickedBlock?.type == DRAGON_EGG) {
+                val player = e.player
+                player.sendMessage("§7[§4系统§7]§c管住自己的手")
+                player.addPotionEffect(PotionEffect(BLINDNESS, 20, 5))
+                player.location.world!!.strikeLightning(player.location)
+            }
         }
     }
 }
