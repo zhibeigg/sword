@@ -1,11 +1,8 @@
 package com.github.sword
 
-import com.germ.germplugin.api.GermPacketAPI
-import com.germ.germplugin.api.SoundType
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import taboolib.common.platform.Plugin
-import taboolib.common.platform.function.getProxyPlayer
 import taboolib.common.platform.function.info
 import taboolib.module.configuration.Config
 import taboolib.module.configuration.Configuration
@@ -16,7 +13,20 @@ object sword : Plugin() {
     lateinit var config: Configuration
 
     override fun onEnable() {
-        info("Sword!启动成功！by.zhi_bei")
+        say("&a┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓")
+        say("&a┃&e      ___           ___           ___           ___           ___     &a┃")
+        say("&a┃&e     /\\  \\         /\\__\\         /\\  \\         /\\  \\         /\\  \\    &a┃")
+        say("&a┃&e    /::\\  \\       /:/ _/_       /::\\  \\       /::\\  \\       /::\\  \\   &a┃")
+        say("&a┃&e   /:/\\ \\  \\     /:/ /\\__\\     /:/\\:\\  \\     /:/\\:\\  \\     /:/\\:\\  \\  &a┃")
+        say("&a┃&e  _\\:\\~\\ \\  \\   /:/ /:/ _/_   /:/  \\:\\  \\   /::\\~\\:\\  \\   /:/  \\:\\__\\ &a┃")
+        say("&a┃&e /\\ \\:\\ \\ \\__\\ /:/_/:/ /\\__\\ /:/__/ \\:\\__\\ /:/\\:\\ \\:\\__\\ /:/__/ \\:|__|&a┃")
+        say("&a┃&e \\:\\ \\:\\ \\/__/ \\:\\/:/ /:/  / \\:\\  \\ /:/  / \\/_|::\\/:/  / \\:\\  \\ /:/  /&a┃")
+        say("&a┃&e  \\:\\ \\:\\__\\    \\::/_/:/  /   \\:\\  /:/  /     |:|::/  /   \\:\\  /:/  / &a┃")
+        say("&a┃&e   \\:\\/:/  /     \\:\\/:/  /     \\:\\/:/  /      |:|\\/__/     \\:\\/:/  /  &a┃")
+        say("&a┃&e    \\::/  /       \\::/  /       \\::/  /       |:|  |        \\::/__/   &a┃")
+        say("&a┃&e     \\/__/         \\/__/         \\/__/         \\|__|         ~~       &a┃")
+        say("&a┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
+        say("&6Sword!&a启动成功！&cby.zhi_bei")
     }
 
     override fun onDisable() {
