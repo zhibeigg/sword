@@ -36,9 +36,10 @@ object Getskill {
 
     @SubscribeEvent
     fun i(e: InventoryClickEvent) {
-        if (e.hotbarButton >= 0 && sk) {
+        say("取消事件${e.hotbarButton}")
+        if (sk) {
             e.isCancelled = true
-            say("取消事件")
+            say("取消事件${e.hotbarButton}")
         }
     }
 
