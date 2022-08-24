@@ -1,12 +1,13 @@
 package com.github.sword
 
+import com.germ.germplugin.api.GermKeyAPI
+import com.germ.germplugin.api.KeyType
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import taboolib.common.platform.Plugin
 import taboolib.common.platform.function.info
 import taboolib.module.configuration.Config
 import taboolib.module.configuration.Configuration
-
 object sword : Plugin() {
 
     @Config("config.yml", migrate = true)
@@ -27,6 +28,7 @@ object sword : Plugin() {
         say("&a┃&e     \\/__/         \\/__/         \\/__/         \\|__|         ~~       &a┃")
         say("&a┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
         say("&6Sword!&a启动成功！&cby.zhi_bei")
+        GermKeyAPI.registerKey(KeyType.KEY_R)
     }
 
     override fun onDisable() {
