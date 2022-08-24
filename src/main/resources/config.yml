@@ -20,10 +20,23 @@ title:
 #显示的副标题
 subtitle: ""
 #渐入 显示 渐出
-in: 10
-on: 10
-out: 10
+in: 20
+on: 20
+out: 20
 #世界列表 第一排是title 第二排是music
 qyc:
   - "§6炁源村"
   - "炁源村"
+#默认技能模式
+default-skill-mode: false
+#禁止释放技能世界
+skill-black:
+  - "qyc"
+  - "zz"
+  - "qzsj"
+  - "first"
+skill-mode-title1: "&4战斗模式"
+skill-mode-subtitle1: "&a可释放技能"
+skill-mode-title2: "&a和平模式"
+skill-mode-subtitle2: "&c不可释放技能"
+skill-mode-key: "KEY_R"

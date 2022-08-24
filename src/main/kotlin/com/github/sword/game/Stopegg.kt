@@ -21,7 +21,8 @@ object Stopegg {
             if (e.clickedBlock?.type == DRAGON_EGG) {
                 val player = e.player
                 player.sendMessage("§7[§4系统§7]§c管住自己的手")
-                player.addPotionEffect(PotionEffect(BLINDNESS, 20, 5))
+                player.addPotionEffect(PotionEffect(BLINDNESS, 40, 40))
+                player.playSound(player, Sound.valueOf("ENTITY_EVOCATION_ILLAGER_CAST_SPELL"), 1F, 1F)
                 player.location.world!!.strikeLightning(player.location)
             }
         }
