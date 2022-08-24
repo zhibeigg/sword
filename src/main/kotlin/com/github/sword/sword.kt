@@ -30,12 +30,13 @@ object sword : Plugin() {
     }
 
     override fun onDisable() {
-        info("Sword!卸载成功！by.zhi_bei")
+        info("&6Sword!&a卸载成功！&cby.zhi_bei")
     }
-
+    fun parse(s: String): String {
+        return s.replace("&", "§").replace("§§", "&")
+    }
     fun say(s: String?) {
-        s!!.replace("&", "§")
         val sender: CommandSender = Bukkit.getConsoleSender()
-        sender.sendMessage(s)
+        sender.sendMessage(s?.let { parse(it) })
     }
 }
