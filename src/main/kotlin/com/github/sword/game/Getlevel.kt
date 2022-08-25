@@ -5,9 +5,6 @@ import org.bukkit.event.entity.PlayerDeathEvent
 import taboolib.common.platform.event.SubscribeEvent
 
 object Getlevel {
-    /**
-     * 监听器仅接受一个参数，为事件的类型
-     */
     @SubscribeEvent
     fun e(e: PlayerDeathEvent) {
         val player = e.entity.player

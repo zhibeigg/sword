@@ -35,6 +35,7 @@ taboolib {
             name("Chemdah").optional(true)
             name("Planners").optional(true)
             name("OriginAttribute").optional(true)
+            name("CMI").optional(true)
         }
     }
 }
