@@ -7,8 +7,12 @@ import com.github.sword.game.Getskill.sk
 import com.github.sword.sword.config
 import com.github.sword.sword.parse
 import com.github.sword.sword.say
+import org.bukkit.event.inventory.ClickType
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerChangedMainHandEvent
+import org.bukkit.event.player.PlayerItemHeldEvent
+import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.PlayerInventory
 import taboolib.common.platform.event.SubscribeEvent
 
 object Getskill {
@@ -19,17 +23,19 @@ object Getskill {
         val player = e.player
         val world = player.world.name
         val sound = config.getString("noskill-sound")
-        for (i in config.getStringList("skill-black").indices) {
-            if (world == config.getStringList("skill-black")[i]) {
-                e.isCancelled = true
-                player.sendTitle(parse("&4禁止释放"), parse("&b当前世界禁止释放技能"), 10, 10, 10)
-                if (sound != null) {
-                    player.playSound(
-                        player.location,
-                        org.bukkit.Sound.valueOf(sound.replace('.', '_').uppercase()),
-                        1.0f,
-                        1.0f
-                    )
+        if (sk) {
+            for (i in config.getStringList("skill-black").indices) {
+                if (world == config.getStringList("skill-black")[i]) {
+                    e.isCancelled = true
+                    player.sendTitle(parse("&4禁止释放"), parse("&b当前世界禁止释放技能"), 10, 10, 10)
+                    if (sound != null) {
+                        player.playSound(
+                            player.location,
+                            org.bukkit.Sound.valueOf(sound.replace('.', '_').uppercase()),
+                            1.0f,
+                            1.0f
+                        )
+                    }
                 }
             }
         }
@@ -43,15 +49,21 @@ object Getskill {
     }
 
     @SubscribeEvent
-    fun f(e: PlayerChangedMainHandEvent) {
-        e.player.sendMessage(e.mainHand.name)
+    fun t(e: GermKeyDownEvent) {
+        val key = e.keyType
+        val player = e.player
+        val slot = player.inventory.heldItemSlot
+        if (sk) {
+            if (key == KeyType.KEY_1 || key == KeyType.KEY_2 || key == KeyType.KEY_3 || key == KeyType.KEY_4 || key == KeyType.KEY_5) {
+                player.inventory.heldItemSlot = slot
+            }
+        }
     }
 
     @SubscribeEvent
     fun k(e: GermKeyDownEvent) {
         val key = e.keyType
         val player = e.player
-        player.sendMessage(key.name)
         if (key == KeyType.KEY_R && !sk) {
             player.sendTitle(
                 config.getString("skill-mode-title1")?.let { parse(it) },

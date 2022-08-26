@@ -36,6 +36,7 @@ taboolib {
             name("Planners").optional(true)
             name("OriginAttribute").optional(true)
             name("CMI").optional(true)
+            name("PlaceholderAPI").optional(true)
         }
     }
 }
