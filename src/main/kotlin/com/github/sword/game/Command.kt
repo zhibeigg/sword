@@ -7,8 +7,9 @@ import taboolib.common.platform.command.CommandHeader
 import taboolib.common.platform.command.mainCommand
 import taboolib.common.platform.command.subCommand
 import taboolib.expansion.createHelper
+import taboolib.platform.util.onlinePlayers
 
-@CommandHeader("sword", aliases = ["swo", "sw"])
+@CommandHeader("sword", aliases = ["swo", "sw"], permission = "sword.command")
 object Command {
 
     @CommandBody
@@ -20,7 +21,10 @@ object Command {
     val reload = subCommand {
         execute<ProxyCommandSender> { sender, _, _ ->
             sword.config.reload()
-            sender.sendMessage("reload successful.")
+            onlinePlayers.forEach(){
+                Quest.germGuiScreen.openGui(it)
+        }
+            sender.sendMessage("重载成功.")
         }
     }
 }

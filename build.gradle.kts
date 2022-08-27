@@ -37,6 +37,7 @@ taboolib {
             name("OriginAttribute").optional(true)
             name("CMI").optional(true)
             name("PlaceholderAPI").optional(true)
+            name("AuthMe").optional(true)
         }
     }
 }

@@ -4,6 +4,10 @@ import com.germ.germplugin.api.GermPacketAPI
 import com.germ.germplugin.api.SoundType
 import com.github.sword.sword
 import com.github.sword.sword.config
+import fr.xephi.authme.api.v3.AuthMeApi
+import fr.xephi.authme.events.AuthMeAsyncPreLoginEvent
+import ink.ptms.chemdah.api.event.collect.PlayerEvents
+import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerChangedWorldEvent
 import taboolib.common.platform.event.SubscribeEvent
 
@@ -28,13 +32,22 @@ object Getfly {
                     config.getInt("on"),
                     config.getInt("out")
                 )
+            }
         }
-        }
+        music(e.player)
+    }
+
+    @SubscribeEvent
+    fun pp(e: AuthMeAsyncPreLoginEvent) {
+        music(e.player)
+    }
+
+    fun music(player: Player) {
         for (i in config.getStringList("music").indices) {
-            if (e.player.world.name == config.getStringList("music")[i])
+            if (player.world.name == config.getStringList("music")[i])
                 GermPacketAPI.playSound(
-                    e.player,
-                    config.getStringList(e.player.world.name)[1],
+                    player,
+                    config.getStringList(player.world.name)[1],
                     SoundType.AMBIENT,
                     0f,
                     0f,
