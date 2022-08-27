@@ -41,3 +41,10 @@ skill-mode-title2: "&a和平模式"
 skill-mode-subtitle2: "&c不可释放技能"
 egg-sound: "ENTITY_ENDERDRAGON_AMBIENT"
 noskill-sound: "ENTITY_EVOCATION_ILLAGER_CAST_SPELL"
+#禁止展示框与盔甲架交互世界
+no-in-world:
+  - "zhucheng"
+  - "qzsj"
+  - "zz"
+  - "fb3"
+SendMessage: "§a你不能在这个世界右键或者左键展示框,或者右键盔甲架"

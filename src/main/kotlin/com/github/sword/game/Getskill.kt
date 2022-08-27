@@ -3,16 +3,8 @@ package com.github.sword.game
 import com.bh.planners.api.event.PlayerCastSkillEvent
 import com.germ.germplugin.api.KeyType
 import com.germ.germplugin.api.event.GermKeyDownEvent
-import com.github.sword.game.Getskill.sk
 import com.github.sword.sword.config
 import com.github.sword.sword.parse
-import com.github.sword.sword.say
-import org.bukkit.event.inventory.ClickType
-import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.event.player.PlayerChangedMainHandEvent
-import org.bukkit.event.player.PlayerItemHeldEvent
-import org.bukkit.inventory.Inventory
-import org.bukkit.inventory.PlayerInventory
 import taboolib.common.platform.event.SubscribeEvent
 
 object Getskill {

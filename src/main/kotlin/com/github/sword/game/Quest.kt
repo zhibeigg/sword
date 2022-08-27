@@ -7,19 +7,17 @@ import com.github.sword.sword.say
 import ink.ptms.chemdah.api.event.collect.ObjectiveEvents
 import ink.ptms.chemdah.api.event.collect.PlayerEvents
 import ink.ptms.chemdah.core.quest.addon.AddonTrack.Companion.track
-import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.entity.Player
 import taboolib.common.platform.event.SubscribeEvent
 
 
 object Quest {
-    val germGuiLabel = GermGuiLabel("text")
-    val germGuiScreen = GermGuiScreen.getGermGuiScreen("sword")
-    val germGuiColor = GermGuiColor("background")
-    val germGuiLabel2 = GermGuiLabel("title")
     var add = true
 
     fun updateadd(player: Player, description: List<String>?) {
+        val germGuiScreen = GermGuiScreen.getGermGuiScreen("quest${player.name}")
+        val germGuiLabel = germGuiScreen.getGuiPart("text") as GermGuiLabel
+        val germGuiColor = germGuiScreen.getGuiPart("background") as GermGuiColor
         if (getcontain(description, germGuiLabel)) {
             if (description != null) {
                 for (i in description.indices) {
@@ -29,12 +27,15 @@ object Quest {
             }
         }
         germGuiColor.height = (9 * germGuiLabel.texts.indices.last + 20).toString()
-        germGuiLabel.texts = PlaceholderAPI.setPlaceholders(player, germGuiLabel.texts)
     }
 
-/*    @SubscribeEvent
+    @SubscribeEvent
     fun j(e: PlayerEvents.Selected) {
         val player = e.player
+        val germGuiLabel = GermGuiLabel("text")
+        val germGuiScreen = GermGuiScreen.getGermGuiScreen("quest${e.player.name}")
+        val germGuiColor = GermGuiColor("background")
+        val germGuiLabel2 = GermGuiLabel("title")
         germGuiColor.color = 0x7A000000
         germGuiColor.locationX = "100"
         germGuiColor.locationY = "40"
@@ -58,7 +59,7 @@ object Quest {
         say("为玩家${player.name}创建任务视图${germGuiLabel.texts}")
         germGuiScreen.openHud(player)
     }
-*/
+
     @SubscribeEvent
     fun m(e: ObjectiveEvents.Continue.Pre) {
         val description = e.task.track()?.description
@@ -68,6 +69,8 @@ object Quest {
 
     @SubscribeEvent
     fun m(e: ObjectiveEvents.Complete.Post) {
+        val germGuiScreen = GermGuiScreen.getGermGuiScreen("quest${e.playerProfile.player.name}")
+        val germGuiLabel = germGuiScreen.getGuiPart("text") as GermGuiLabel
         val description = e.task.track()?.description
         while (delete_contain(description, germGuiLabel))
         say("该条目删除成功")

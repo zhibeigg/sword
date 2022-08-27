@@ -1,5 +1,6 @@
 package com.github.sword.game
 
+import com.germ.germplugin.api.dynamic.gui.GermGuiScreen
 import com.github.sword.sword
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.CommandBody
@@ -22,7 +23,7 @@ object Command {
         execute<ProxyCommandSender> { sender, _, _ ->
             sword.config.reload()
             onlinePlayers.forEach(){
-                Quest.germGuiScreen.openGui(it)
+                GermGuiScreen.getGermGuiScreen("quest${it.name}").openGui(it)
         }
             sender.sendMessage("重载成功.")
         }
