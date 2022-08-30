@@ -2,12 +2,15 @@ package com.github.sword
 
 import com.germ.germplugin.api.GermKeyAPI
 import com.germ.germplugin.api.KeyType
+import com.germ.germplugin.api.yaml.YamlManager
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import taboolib.common.platform.Plugin
 import taboolib.common.platform.function.info
 import taboolib.module.configuration.Config
 import taboolib.module.configuration.Configuration
+import taboolib.platform.BukkitPlugin
+
 object sword : Plugin() {
 
     @Config("config.yml", migrate = true, autoReload = true)
@@ -32,7 +35,7 @@ object sword : Plugin() {
     }
 
     override fun onDisable() {
-        info("&6Sword!&a卸载成功！&cby.zhi_bei")
+        say("&6Sword!&a卸载成功！&cby.zhi_bei")
     }
     fun parse(s: String): String {
         return s.replace("&", "§").replace("§§", "&")

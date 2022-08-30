@@ -11,7 +11,7 @@ object Getskill {
     var sk = false
 
     @SubscribeEvent
-    fun e(e: PlayerCastSkillEvent.Pre) {
+    fun m(e: PlayerCastSkillEvent.Pre) {
         val player = e.player
         val world = player.world.name
         val sound = config.getString("noskill-sound")
@@ -34,14 +34,14 @@ object Getskill {
     }
 
     @SubscribeEvent
-    fun m(e: PlayerCastSkillEvent.Pre) {
+    fun e(e: PlayerCastSkillEvent.Pre) {
         if (!sk) {
             e.isCancelled = true
         }
     }
 
     @SubscribeEvent
-    fun t(e: GermKeyDownEvent) {
+    fun m(e: GermKeyDownEvent) {
         val key = e.keyType
         val player = e.player
         val slot = player.inventory.heldItemSlot
@@ -53,7 +53,7 @@ object Getskill {
     }
 
     @SubscribeEvent
-    fun k(e: GermKeyDownEvent) {
+    fun e(e: GermKeyDownEvent) {
         val key = e.keyType
         val player = e.player
         if (key == KeyType.KEY_R && !sk) {

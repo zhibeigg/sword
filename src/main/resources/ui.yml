@@ -1,0 +1,32 @@
+questUI:
+  background:
+    type: 1
+    enable: true
+    shape: 0
+    locationX: "100"
+    locationY: "40"
+    locationZ: "0"
+    width: "100"
+    height: "20"
+    color: 0x7A000000
+  text:
+    type: 4
+    enable: true
+    align: "left"
+    scale: "1"
+    lineSpace: "1"
+    texts:
+      - "{quest_1}"
+    locationX: "101"
+    locationY: "50"
+    locationZ: "1"
+  text2:
+    type: 4
+    enable: true
+    align: "center"
+    scale: "1"
+    texts:
+      - "&6&l任务面板"
+    locationX: "150"
+    locationY: "41"
+    locationZ: "1"
