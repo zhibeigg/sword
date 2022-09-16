@@ -22,7 +22,7 @@ object Getsword {
                 if (name == sword.config.getString("成长型武器名")) {
                     player.sendMessage(sword.config.getString("龙剑伤害信息") + player.level)
                     val data = AttributeData()
-                    data.merge(OriginAttributeAPI.loadList(listOf("体术攻击 +" + player.level)))
+                    data.merge(OriginAttributeAPI.loadList(listOf("体术攻击 +" + player.level * sword.config.getInt("xlevel"))))
                     OriginAttributeAPI.setExtra(uuid, "sword", data)
                 } else {
                     OriginAttributeAPI.removeExtra(uuid, "sword")

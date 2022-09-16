@@ -2,6 +2,7 @@ package com.github.sword.game
 
 import com.github.sword.sword
 import org.bukkit.event.entity.EntityDamageByBlockEvent
+import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause
 import taboolib.common.platform.event.SubscribeEvent
 

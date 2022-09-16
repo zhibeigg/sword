@@ -14,7 +14,7 @@ object Getfly {
     fun e(e: PlayerChangedWorldEvent) {
         val player = e.player
         if (player.allowFlight) {
-            player.isFlying = false
+            player.allowFlight = false
             val name = player.displayName
             sword.say("§c玩家$name§c飞行已经取消")
         }

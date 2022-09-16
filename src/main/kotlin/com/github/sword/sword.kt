@@ -11,7 +11,7 @@ import taboolib.module.configuration.Configuration
 
 object sword : Plugin() {
 
-    @Config("config.yml", migrate = true, autoReload = true)
+    @Config("config.yml", migrate = true)
     lateinit var config: Configuration
 
     override fun onEnable() {

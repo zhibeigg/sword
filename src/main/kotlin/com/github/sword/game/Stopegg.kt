@@ -18,8 +18,11 @@ object Stopegg {
     @SubscribeEvent
     fun m(e: PlayerInteractEvent) {
         val sound = sword.config.getString("egg-sound")
-        if (e.hasBlock() && !e.isBlockInHand ) {
-            if (e.clickedBlock?.type == DRAGON_EGG) {
+        val block = e.isBlockInHand
+        val hasblock = e.hasBlock()
+        if ( hasblock && !block ) {
+            val type = e.clickedBlock?.type
+            if (type == DRAGON_EGG) {
                 val player = e.player
                 player.sendMessage("§7[§4系统§7]§c管住自己的手")
                 player.addPotionEffect(PotionEffect(BLINDNESS, 40, 40))

@@ -2,29 +2,26 @@ plugins {
     `java-library`
     `maven-publish`
     id("io.izzel.taboolib") version "1.42"
-    id("org.jetbrains.kotlin.jvm") version "1.5.10"
+    id("org.jetbrains.kotlin.jvm") version "1.7.10"
 }
 
 taboolib {
     install("common")
     install("common-5")
-    install("module-ai")
+    install("common-5-shaded")
     install("module-chat")
-    install("module-configuration")
-    install("module-database")
-    install("module-metrics")
-//    install("module-effect")
+    install("module-chat-shaded")
+    install("module-ai")
     install("module-kether")
-    install("module-lang")
-    install("module-navigation")
-    install("module-navigation")
+    install("module-effect")
     install("module-nms")
     install("module-nms-util")
-    install("module-ui")
-    install("expansion-command-helper")
+    install("module-configuration")
     install("platform-bukkit")
+    install("expansion-command-helper")
+    install("expansion-player-database")
     classifier = null
-    version = "6.0.9-64"
+    version = "6.0.9-92"
 
     description {
         contributors {
@@ -38,6 +35,7 @@ taboolib {
             name("CMI").optional(true)
             name("PlaceholderAPI").optional(true)
             name("AuthMe").optional(true)
+            name("Kingdoms").optional(true)
         }
     }
 }
