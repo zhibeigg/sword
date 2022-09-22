@@ -1,6 +1,9 @@
 package com.github.sword.game
 
 import com.bh.planners.api.event.PlayerCastSkillEvent
+import com.germ.germplugin.api.GermHudAPI
+import com.germ.germplugin.api.GermPacketAPI
+import com.germ.germplugin.api.HudMessageType
 import com.germ.germplugin.api.KeyType
 import com.germ.germplugin.api.event.GermKeyDownEvent
 import com.github.sword.sword.config
@@ -57,22 +60,10 @@ object Getskill {
         val key = e.keyType
         val player = e.player
         if (key == KeyType.KEY_R && !sk) {
-            player.sendTitle(
-                config.getString("skill-mode-title1")?.let { parse(it) },
-                config.getString("skill-mode-subtitle1")?.let { parse(it) },
-                10,
-                20,
-                10
-            )
+            GermPacketAPI.sendHudMessage(player, HudMessageType.LEFT1, "skill-mode-title1")
             sk = true
         } else if (key == KeyType.KEY_R) {
-            player.sendTitle(
-                config.getString("skill-mode-title2")?.let { parse(it) },
-                config.getString("skill-mode-subtitle2")?.let { parse(it) },
-                10,
-                20,
-                10
-            )
+            GermPacketAPI.sendHudMessage(player, HudMessageType.LEFT1, "skill-mode-title2")
             sk = false
         }
     }

@@ -39,9 +39,7 @@ skill-black:
   - "qzsj"
   - "first"
 skill-mode-title1: "&4战斗模式"
-skill-mode-subtitle1: "&a可释放技能"
 skill-mode-title2: "&a和平模式"
-skill-mode-subtitle2: "&c不可释放技能"
 egg-sound: "ENTITY_ENDERDRAGON_AMBIENT"
 noskill-sound: "ENTITY_EVOCATION_ILLAGER_CAST_SPELL"
 #禁止展示框与盔甲架交互世界
