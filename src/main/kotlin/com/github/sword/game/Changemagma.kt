@@ -1,6 +1,8 @@
 package com.github.sword.game
 
 import com.github.sword.sword
+import com.github.sword.sword.config
+import org.bukkit.event.entity.EntityCombustEvent
 import org.bukkit.event.entity.EntityDamageByBlockEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause
@@ -19,5 +21,14 @@ object Changemagma {
             true
         if (type == DamageCause.CONTACT && config.getInt("touch") != 0) e.damage =
             config.getInt("touch").toDouble()
+    }
+
+    @SubscribeEvent
+    fun fire(e: EntityDamageEvent) {
+        if (!e.isCancelled ) {
+            if (e.cause == DamageCause.FIRE || e.cause == DamageCause.FIRE_TICK) {
+                e.damage = config.getInt("fire-damage").toDouble()
+            }
+        }
     }
 }

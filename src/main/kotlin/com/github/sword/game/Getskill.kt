@@ -1,5 +1,7 @@
 package com.github.sword.game
 
+import com.bh.planners.api.PlannersAPI
+import com.bh.planners.api.PlannersAPI.plannersProfile
 import com.bh.planners.api.event.PlayerCastSkillEvent
 import com.germ.germplugin.api.GermHudAPI
 import com.germ.germplugin.api.GermPacketAPI
@@ -8,6 +10,7 @@ import com.germ.germplugin.api.KeyType
 import com.germ.germplugin.api.event.GermKeyDownEvent
 import com.github.sword.sword.config
 import com.github.sword.sword.parse
+import ink.ptms.chemdah.taboolib.platform.event.PlayerJumpEvent
 import taboolib.common.platform.event.SubscribeEvent
 
 object Getskill {
@@ -60,10 +63,10 @@ object Getskill {
         val key = e.keyType
         val player = e.player
         if (key == KeyType.KEY_R && !sk) {
-            GermPacketAPI.sendHudMessage(player, HudMessageType.LEFT1, "skill-mode-title1")
+            GermPacketAPI.sendHudMessage(player, HudMessageType.LEFT1, config.getString("skill-mode-title1"))
             sk = true
         } else if (key == KeyType.KEY_R) {
-            GermPacketAPI.sendHudMessage(player, HudMessageType.LEFT1, "skill-mode-title2")
+            GermPacketAPI.sendHudMessage(player, HudMessageType.LEFT1, config.getString("skill-mode-title2"))
             sk = false
         }
     }

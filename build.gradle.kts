@@ -14,6 +14,7 @@ taboolib {
     install("module-ai")
     install("module-kether")
     install("module-effect")
+    install("module-lang")
     install("module-nms")
     install("module-nms-util")
     install("module-configuration")

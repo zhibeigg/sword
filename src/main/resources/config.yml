@@ -1,35 +1,55 @@
 成长型武器名: "§b§l⚝§d§l樱龙剑§b§l⚝"
 龙剑伤害信息: "§7[§c系统§7] §e樱龙剑激活 §c体术攻击+"
-#等级加成倍数
-xlevel: "1"
 #死亡信息世界名
 world:
   - "fb3"
-#掉级信息
-message: '&d&l异梦结束 炁散百一'
 炁散百分之几: 1
 #岩浆块造成的伤害
 magma: 0
 #仙人掌造成的伤害
-touch: 0
+touch: 10
+#燃烧造成的伤害
+fire-damage: 10
 #是否取消龙蛋传送
 dragon-egg: true
+egg-sound: "ENTITY_ENDERDRAGON_AMBIENT"
 #背景音乐世界
 music:
   - "qyc"
 #传送显示title的世界
 title:
   - "qyc"
+  - "fb3"
+  - "fb2"
+  - "dl"
+  - "qzsj"
+  - "start"
+  - "world_the_end"
+  - "world_nether"
 #显示的副标题
 subtitle: ""
 #渐入 显示 渐出
-in: 20
+in: 40
 on: 20
 out: 20
 #世界列表 第一排是title 第二排是music
 qyc:
   - "§6炁源村"
   - "炁源村"
+fb3:
+  - "§d进入异梦"
+fb2:
+  - "§a神眷之地"
+dl:
+  - "§6争乱大陆"
+start:
+  - "§0时空湍流"
+world_the_end:
+  - "§5§l湮 龙 域"
+world_nether:
+  - "§4§l罗 刹 城"
+qzsj:
+  - "§6§l四 神 殿"
 #默认技能模式
 default-skill-mode: false
 #禁止释放技能世界
@@ -38,9 +58,8 @@ skill-black:
   - "zz"
   - "qzsj"
   - "first"
-skill-mode-title1: "&4战斗模式"
-skill-mode-title2: "&a和平模式"
-egg-sound: "ENTITY_ENDERDRAGON_AMBIENT"
+skill-mode-title1: "&a可释放技能"
+skill-mode-title2: "&c不可释放技能"
 noskill-sound: "ENTITY_EVOCATION_ILLAGER_CAST_SPELL"
 #禁止展示框与盔甲架交互世界
 no-in-world:
@@ -58,3 +77,6 @@ SendMessage: "§a你不能在这个世界右键或者左键展示框,或者右�
 降级音乐: "降级"
 升级音乐: "升级"
 分割线: "§m#DB822116-FFFFFF00-DB822116                                               "
+team-world:
+  - "fb3"
+  - "world_the_end"
