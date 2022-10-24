@@ -82,3 +82,12 @@ SendMessage: "§a你不能在这个世界右键或者左键展示框,或者右�
 team-world:
   - "fb3"
   - "world_the_end"
+random: false
+random-command:
+  - "mm i give %player% 五角星"
+  - "say §c%player%§6幸运的被一颗五角星砸中了！"
+是否开启禁止攻击: false
+攻击武器lore: "主手"
+疾跑: true
+no-fall:
+  - "qyc"

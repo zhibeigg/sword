@@ -13,7 +13,7 @@ object GetKingdoms {
         val kingdom2 = e.invasion.defender.name
         val player = e.invasion.invaderPlayer.name
         onlinePlayers.forEach {
-            GermPacketAPI.sendHudMessage(it, HudMessageType.CENTER1, "§b国家§c§l${kingdom1}§b的成员§4§l${player}§b对国家§a§l${kingdom2}§b发动战争！")
+            it.sendMessage("§c[§e战争通告§c] §b国家§c§l${kingdom1}§b的成员§4§l${player}§b对国家§a§l${kingdom2}§b发动战争！")
         }
     }
 }

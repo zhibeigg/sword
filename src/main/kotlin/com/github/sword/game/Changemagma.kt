@@ -2,6 +2,8 @@ package com.github.sword.game
 
 import com.github.sword.sword
 import com.github.sword.sword.config
+import org.bukkit.entity.EntityType
+import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityCombustEvent
 import org.bukkit.event.entity.EntityDamageByBlockEvent
 import org.bukkit.event.entity.EntityDamageEvent
@@ -30,5 +32,16 @@ object Changemagma {
                 e.damage = config.getInt("fire-damage").toDouble()
             }
         }
+    }
+
+    @SubscribeEvent
+    fun drop(e: EntityDamageEvent) {
+        if (e.entityType == EntityType.PLAYER) {
+            val player = e.entity as Player
+            if (e.cause == DamageCause.FALL && config.getStringList("no-fall").contains(player.world.name)) {
+                e.isCancelled = true
+            }
+        }
+        return
     }
 }

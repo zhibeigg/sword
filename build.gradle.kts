@@ -22,7 +22,7 @@ taboolib {
     install("expansion-command-helper")
     install("expansion-player-database")
     classifier = null
-    version = "6.0.9-92"
+    version = "6.0.9-117"
 
     description {
         contributors {
@@ -31,8 +31,10 @@ taboolib {
         dependencies {
             name("GermPlugin").optional(true)
             name("Chemdah").optional(true)
+            name("Adyeshach").optional(true)
             name("Planners").optional(true)
             name("OriginAttribute").optional(true)
+            name("BattlePass").optional(true)
             name("CMI").optional(true)
             name("PlaceholderAPI").optional(true)
             name("AuthMe").optional(true)

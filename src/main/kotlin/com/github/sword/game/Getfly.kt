@@ -5,6 +5,7 @@ import com.germ.germplugin.api.SoundType
 import com.github.sword.sword
 import com.github.sword.sword.config
 import fr.xephi.authme.events.LoginEvent
+import org.bukkit.boss.BossBar
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerChangedWorldEvent
 import taboolib.common.platform.event.SubscribeEvent

@@ -2,13 +2,13 @@ package com.github.sword
 
 import com.germ.germplugin.api.GermKeyAPI
 import com.germ.germplugin.api.KeyType
-
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import taboolib.common.platform.Plugin
 import taboolib.common.platform.function.warning
 import taboolib.module.configuration.Config
 import taboolib.module.configuration.Configuration
+
 
 object sword : Plugin() {
 
