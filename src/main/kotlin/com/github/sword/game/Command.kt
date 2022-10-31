@@ -37,9 +37,9 @@ object Command {
 
     @CommandBody
     val open = subCommand {
-        dynamic(commit = "player") {
+        dynamic("player") {
             suggestion<CommandSender> { _, _ -> onlinePlayers().map { it.name } }
-            dynamic(commit = "entity") {
+            dynamic("entity") {
                 execute<CommandSender> { _, context, argument ->
                     val player = Bukkit.getPlayerExact(context.argument(-1)) ?: return@execute
                     val entity = AdyeshachAPI.getEntityFromId(argument, player) ?: return@execute

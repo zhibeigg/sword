@@ -1,16 +1,14 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("io.izzel.taboolib") version "1.42"
+    id("io.izzel.taboolib") version "1.50"
     id("org.jetbrains.kotlin.jvm") version "1.7.10"
 }
 
 taboolib {
     install("common")
     install("common-5")
-    install("common-5-shaded")
     install("module-chat")
-    install("module-chat-shaded")
     install("module-ai")
     install("module-kether")
     install("module-effect")
@@ -22,7 +20,7 @@ taboolib {
     install("expansion-command-helper")
     install("expansion-player-database")
     classifier = null
-    version = "6.0.9-117"
+    version = "6.0.10-16"
 
     description {
         contributors {
