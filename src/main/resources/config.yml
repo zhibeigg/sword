@@ -1,17 +1,20 @@
-#debug模式
 debug: false
 成长型武器名: "§b§l⚝§d§l樱龙剑§b§l⚝"
 龙剑伤害信息: "§7[§c系统§7] §e樱龙剑激活 §c体术攻击+"
+#龙剑伤害倍数
+xlevel: 1
 #死亡信息世界名
 world:
   - "fb3"
+#掉级信息
+message: '§d§l异梦结束 炁散百一'
 炁散百分之几: 1
 #岩浆块造成的伤害
 magma: 0
 #仙人掌造成的伤害
 touch: 10
 #燃烧造成的伤害
-fire-damage: 10
+fire-damage: 20
 #是否取消龙蛋传送
 dragon-egg: true
 egg-sound: "ENTITY_ENDERDRAGON_AMBIENT"
@@ -72,9 +75,9 @@ no-in-world:
 SendMessage: "§a你不能在这个世界右键或者左键展示框,或者右键盔甲架"
 #升级提示功能
 前缀内容: "§7§l[§a等级系统§7§l] §b§l"
-升级内容: " §e§l炁源 §7|§a+§7| §d§l"
+升级内容: " §e§l炁源等级 §7|§a+§7| §d§l"
 升级中间的内容: " §a➟ §d§l"
-降级内容: " §e§l炁源 §7|§c-§7| §d§l"
+降级内容: " §e§l炁源等级 §7|§c-§7| §d§l"
 降级中间的内容: " §c➟ §d§l"
 降级音乐: "降级"
 升级音乐: "升级"
@@ -85,8 +88,10 @@ team-world:
 random: false
 random-command:
   - "mm i give %player% 五角星"
-  - "say §c%player%§6幸运的被一颗五角星砸中了！"
-是否开启禁止攻击: false
+  - "say &c%player%&6幸运的被一颗五角星砸中了！"
+  - "pl skill directCast %player% 掉星星 1"
+  - "bc &c%player%&6幸运的被一颗五角星砸中了！"
+是否开启禁止攻击: true
 攻击武器lore: "主手"
 疾跑: true
 no-fall:
