@@ -24,11 +24,14 @@ object Getsword {
                     val data = AttributeData()
                     data.merge(OriginAttributeAPI.loadList(listOf("体术攻击 +" + player.level * sword.config.getInt("xlevel"))))
                     OriginAttributeAPI.setExtra(uuid, "sword", data)
+                    OriginAttributeAPI.callUpdate(player)
                 } else {
                     OriginAttributeAPI.removeExtra(uuid, "sword")
+                    OriginAttributeAPI.callUpdate(player)
                 }
             } else {
                 OriginAttributeAPI.removeExtra(uuid, "sword")
+                OriginAttributeAPI.callUpdate(player)
             }
         }
     }

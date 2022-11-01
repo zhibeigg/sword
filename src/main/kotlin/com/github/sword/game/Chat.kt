@@ -1,25 +1,49 @@
 package com.github.sword.game
 
-import me.clip.placeholderapi.PlaceholderAPI
+import com.germ.germplugin.api.dynamic.gui.GermGuiButton
+import com.germ.germplugin.api.event.gui.GermGuiButtonEvent
+import taboolib.platform.compat.PlaceholderExpansion
+import org.bukkit.entity.Player
 import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.serverct.ersha.dungeon.DungeonPlus
 import taboolib.common.platform.event.SubscribeEvent
 
-object Chat {
+object Chat : PlaceholderExpansion {
+    var ssss = 0
+
     @SubscribeEvent
     fun e(e: AsyncPlayerChatEvent) {
         val player = e.player
-        if (!DungeonPlus.dungeonManager.isDungeonWorld(player.world)) {
-            if (PlaceholderAPI.setPlaceholders(player, "%ssss%") == "1") {
-                DungeonPlus.teamManager.getTeam(player)?.sendTeamMessage(e.message)
-                if (DungeonPlus.teamManager.getTeam(player) != null) {
-                    e.isCancelled = true
-                }
-                return
+        if (ssss == 1) {
+            DungeonPlus.teamManager.getTeam(player)?.sendTeamMessage("§f[§6队内消息§f] §7${player.displayName}§f§l:" + e.message)
+            if (DungeonPlus.teamManager.getTeam(player) != null) {
+                e.isCancelled = true
             }
         }
-        if (PlaceholderAPI.setPlaceholders(player, "%ssss%") == "1") {
-            e.message = "*" + e.message
+    }
+
+    @SubscribeEvent
+    fun check(e: GermGuiButtonEvent) {
+        if (e.eventType == GermGuiButton.EventType.LEFT_CLICK && e.germGuiScreen.guiName == "game_gui_chat" && e.germGuiButton.indexName == "频道") {
+            ssss = if (ssss == 0) {
+                e.germGuiButton.setText("组队")
+                1
+            } else {
+                e.germGuiButton.setText("世界")
+                0
+            }
         }
     }
+
+    override val identifier: String
+        get() = "sword"
+
+    override fun onPlaceholderRequest(player: Player?, args: String): String {
+        return if (ssss == 0 && args == "channel") {
+            "世界"
+        } else {
+            "组队"
+        }
+    }
+
 }
