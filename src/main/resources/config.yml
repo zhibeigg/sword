@@ -96,3 +96,8 @@ random-command:
 疾跑: true
 no-fall:
   - "qyc"
+qq: 231659096
+join: "玩家 %player% 进入服务器"
+quit: "玩家 %player% 离开服务器"
+在线玩家: "#在线玩家"
+查询: "#查询"

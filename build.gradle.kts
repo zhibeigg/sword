@@ -38,6 +38,7 @@ taboolib {
             name("AuthMe").optional(true)
             name("Kingdoms").optional(true)
             name("MyPet").optional(true)
+            name("MiraiMC").optional(true)
         }
     }
 }
