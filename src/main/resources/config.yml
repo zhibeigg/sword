@@ -112,3 +112,4 @@ qq-money: false
 附魔信息: "§4| §c当前已禁止附魔台的使用"
 禁用附魔: true
 禁用放入附魔台: true
+禁用附魔音效: "ITEM_SHIELD_BREAK"

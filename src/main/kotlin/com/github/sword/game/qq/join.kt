@@ -2,11 +2,10 @@ package com.github.sword.game.qq
 
 import com.germ.germplugin.api.util.VaultUtil
 import com.github.sword.sword.config
+import com.github.sword.sword.debug
 import me.dreamvoid.miraimc.api.MiraiBot
 import me.dreamvoid.miraimc.bukkit.event.bot.MiraiBotOnlineEvent
-import me.dreamvoid.miraimc.bukkit.event.message.passive.MiraiFriendMessageEvent
 import me.dreamvoid.miraimc.bukkit.event.message.passive.MiraiGroupMessageEvent
-import me.dreamvoid.miraimc.bukkit.event.message.presend.MiraiGroupMessagePreSendEvent
 import org.bukkit.Bukkit
 import org.bukkit.Bukkit.getOnlinePlayers
 import org.bukkit.event.player.PlayerJoinEvent
@@ -42,6 +41,7 @@ object join {
     fun getmessage(e: MiraiGroupMessageEvent) {
         if (!config.getBoolean("qq-list")) return
         if (bot == null) return
+        debug(e.group.toString() + e.groupName)
         if (e.groupID == config.getLong("qq")) {
             if (e.messageToString == config.getString("在线玩家")) {
                 val playerlist : List<String> = listOf("-----在线玩家-----")
@@ -58,8 +58,11 @@ object join {
         if (!config.getBoolean("qq-money")) return
         val message = e.message
         if (message.contains(config.getString("查询") ?: "#查询")) {
-            val sender = Bukkit.getPlayer(message.replace(config.getString("查询") ?: "#查询", null.toString()))
+            val player = message.replace(config.getString("查询") ?: "#查询", null.toString())
+            debug(player)
+            val sender = Bukkit.getPlayer(player)
             val money = VaultUtil.getMoney(sender)
+            debug(money.toString())
             if (money == 0.0) {
                 MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("未能查询到玩家，格式${config.getString("查询") ?: "#查询"}player")
             } else {
