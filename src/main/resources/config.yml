@@ -97,9 +97,17 @@ random-command:
 no-fall:
   - "qyc"
 qq: 231659096
+# 是否开启进服提醒
+qq-join: false
 join: "玩家 %player% 进入服务器"
+# 是否开启退服提醒
+qq-quit: false
 quit: "玩家 %player% 离开服务器"
+# 是否开启在线玩家查询
+qq-list: false
 在线玩家: "#在线玩家"
+# 是否开启玩家炁源币查询
+qq-money: false
 查询: "#查询"
 附魔信息: "§4| §c当前已禁止附魔台的使用"
 禁用附魔: true

@@ -24,6 +24,7 @@ object join {
 
     @SubscribeEvent
     fun join(e: PlayerJoinEvent) {
+        if (!config.getBoolean("qq-join")) return
         val name = e.player.displayName
         if (bot == null) return
         bot!!.getGroup(config.getLong("qq")).sendMessage(config.getString("join")?.replace("%player%", name))
@@ -31,6 +32,7 @@ object join {
 
     @SubscribeEvent
     fun quit(e: PlayerQuitEvent) {
+        if (!config.getBoolean("qq-quit")) return
         val name = e.player.displayName
         if (bot == null) return
         bot!!.getGroup(config.getLong("qq")).sendMessage(config.getString("quit")?.replace("%player%", name))
@@ -38,6 +40,7 @@ object join {
 
     @SubscribeEvent
     fun getmessage(e: MiraiGroupMessageEvent) {
+        if (!config.getBoolean("qq-list")) return
         if (bot == null) return
         if (e.groupID == config.getLong("qq")) {
             if (e.messageToString == config.getString("在线玩家")) {
@@ -52,11 +55,16 @@ object join {
 
     @SubscribeEvent
     fun money(e: MiraiGroupMessageEvent) {
+        if (!config.getBoolean("qq-money")) return
         val message = e.message
         if (message.contains(config.getString("查询") ?: "#查询")) {
             val sender = Bukkit.getPlayer(message.replace(config.getString("查询") ?: "#查询", null.toString()))
             val money = VaultUtil.getMoney(sender)
-            MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("炁源币：${money}")
+            if (money == 0.0) {
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("未能查询到玩家，格式${config.getString("查询") ?: "#查询"}player")
+            } else {
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("炁源币：${money}")
+            }
         }
     }
 
