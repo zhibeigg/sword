@@ -1,9 +1,10 @@
 package com.github.sword.game.qq
 
-import com.germ.germplugin.api.util.VaultUtil
 import com.github.sword.sword.config
 import com.github.sword.sword.debug
+import me.clip.placeholderapi.PlaceholderAPI
 import me.dreamvoid.miraimc.api.MiraiBot
+import me.dreamvoid.miraimc.bukkit.event.bot.MiraiBotOfflineEvent
 import me.dreamvoid.miraimc.bukkit.event.bot.MiraiBotOnlineEvent
 import me.dreamvoid.miraimc.bukkit.event.message.passive.MiraiGroupMessageEvent
 import org.bukkit.Bukkit
@@ -41,14 +42,17 @@ object join {
     fun getmessage(e: MiraiGroupMessageEvent) {
         if (!config.getBoolean("qq-list")) return
         if (bot == null) return
-        debug(e.group.toString() + e.groupName)
+        debug(e.groupID.toString() + e.groupName)
         if (e.groupID == config.getLong("qq")) {
-            if (e.messageToString == config.getString("在线玩家")) {
-                val playerlist : List<String> = listOf("-----在线玩家-----")
-                for (i in getOnlinePlayers().indices) {
-                    playerlist.plus(getOnlinePlayers().toString()[i])
+            debug("进入在线玩家1" + e.message)
+            if (e.message == config.getString("在线玩家")) {
+                debug("进入在线玩家2")
+                var playerlist = "在线玩家:"
+                getOnlinePlayers().map {
+                    playerlist = playerlist + it.displayName + "|"
+                    debug(it.displayName)
                 }
-                bot!!.getGroup(config.getLong("qq")).sendMessage(playerlist.toString())
+                bot!!.getGroup(config.getLong("qq")).sendMessage(playerlist)
             }
         }
     }
@@ -58,17 +62,39 @@ object join {
         if (!config.getBoolean("qq-money")) return
         val message = e.message
         if (message.contains(config.getString("查询") ?: "#查询")) {
-            val player = message.replace(config.getString("查询") ?: "#查询", null.toString())
+            val player = message.removePrefix(config.getString("查询") ?: "#查询")
             debug(player)
             val sender = Bukkit.getPlayer(player)
-            val money = VaultUtil.getMoney(sender)
-            debug(money.toString())
-            if (money == 0.0) {
-                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("未能查询到玩家，格式${config.getString("查询") ?: "#查询"}player")
+            if (sender != null) {
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage(config.getString("查询消息")?.let { PlaceholderAPI.setPlaceholders(sender, it) })
             } else {
-                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("炁源币：${money}")
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("未能查询到在线玩家，格式${config.getString("查询") ?: "#查询"}player")
             }
         }
     }
 
+    @SubscribeEvent
+    fun start(e: MiraiBotOnlineEvent) {
+        if (config.getBoolean("启动提醒")) {
+            e.bot.getGroup(config.getLong("qq")).sendMessage(config.getString("启动消息"))
+        }
+    }
+
+    @SubscribeEvent
+    fun stop(e: MiraiBotOfflineEvent) {
+        if (config.getBoolean("关闭提醒")) {
+            e.bot.getGroup(config.getLong("qq")).sendMessage(config.getString("关闭消息"))
+        }
+    }
+
+    @SubscribeEvent
+    fun help(e: MiraiGroupMessageEvent) {
+        if (!config.getBoolean("qq-help")) return
+        if (e.message == "#帮助" || e.message == "#help") {
+            MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage(config.getString("帮助消息"))
+        }
+        if (e.message == "#wiki" || e.message == "#百科") MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("wiki.mcwar.cn")
+        if (e.message == "#map" || e.message == "#地图") MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("map.mcwar.cn")
+        if (e.message == "#官网" || e.message == "#web") MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("www.mcwar.cn")
+    }
 }
