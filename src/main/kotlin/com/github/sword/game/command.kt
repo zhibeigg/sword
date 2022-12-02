@@ -4,8 +4,11 @@ import com.github.sword.sword
 import com.github.sword.sword.debug
 import ink.ptms.adyeshach.api.AdyeshachAPI
 import ink.ptms.adyeshach.api.event.AdyeshachEntityInteractEvent
+import io.lumine.xikage.mythicmobs.MythicMobs
+import io.lumine.xikage.mythicmobs.util.MythicUtil
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Entity
 import org.kingdoms.constants.player.KingdomPlayer
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.CommandBody
@@ -58,6 +61,31 @@ object command {
                     val number = argument.toInt()
                     debug("国家$kingdom,土地加$number,玩家$player")
                     kingdom.maxLandsModifier += number
+                }
+            }
+        }
+    }
+
+    @CommandBody
+    val cast = subCommand {
+        dynamic("player") {
+            suggestion<CommandSender> { _, _ -> Bukkit.getOnlinePlayers().map { it.displayName }; }
+            dynamic("name") {
+                execute<CommandSender> { _, context, argument ->
+                    val player = Bukkit.getPlayerExact(context.argument(-1)) ?: return@execute
+                    val target = MythicUtil.getTargetedEntity(player)
+                    val spell: String = argument
+                    val targets: MutableList<Entity?> = ArrayList()
+                    targets.add(target)
+                    MythicMobs.inst().apiHelper.castSkill(
+                        player,
+                        spell,
+                        player,
+                        player.location,
+                        targets,
+                        null,
+                        1.0f
+                    )
                 }
             }
         }

@@ -1,24 +1,25 @@
 package com.github.sword.game.qq
 
-import com.github.sword.sword
-import me.clip.placeholderapi.PlaceholderAPI
+import com.Zrips.CMI.CMI
+import com.github.sword.game.qq.group.papi
+import com.github.sword.sword.config
 import me.dreamvoid.miraimc.api.MiraiBot
 import me.dreamvoid.miraimc.bukkit.event.message.passive.MiraiFriendMessageEvent
-import org.bukkit.Bukkit
 import taboolib.common.platform.event.SubscribeEvent
 
 
 object friend {
     @SubscribeEvent
     fun onFriendMessageReceive(e: MiraiFriendMessageEvent) {
-        if (!sword.config.getBoolean("qq-money")) return
+        if (!config.getBoolean("qq-money")) return
         val message = e.message
-        if (message.contains("查询")) {
-            val sender = Bukkit.getPlayer(message.removePrefix("查询"))
+        if (message.contains(config.getString("查询") ?: "#查询 ")) {
+            val player = message.removePrefix(config.getString("查询") ?: "#查询 ")
+            val sender = CMI.getInstance().playerManager.getUser(player)
             if (sender == null) {
-                MiraiBot.getBot(e.botID).getFriend(e.senderID).sendMessage("未能查询到玩家，格式 查询player")
+                MiraiBot.getBot(e.botID).getFriend(e.senderID).sendMessage("未能查询到玩家，格式\n${config.getString("查询") ?: "#查询"}player")
             } else {
-                MiraiBot.getBot(e.botID).getFriend(e.senderID).sendMessage(sword.config.getString("查询消息")?.let { PlaceholderAPI.setPlaceholders(sender, it) })
+                MiraiBot.getBot(e.botID).getFriend(e.senderID).sendMessage(papi(config.getString("查询消息"), sender))
             }
         }
     }

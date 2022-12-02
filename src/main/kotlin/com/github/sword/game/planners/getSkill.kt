@@ -1,13 +1,20 @@
 package com.github.sword.game.planners
 
+import com.bh.planners.api.ContextAPI
+import com.bh.planners.api.PlannersAPI
+import com.bh.planners.api.PlannersAPI.plannersProfile
 import com.bh.planners.api.event.PlayerCastSkillEvent
+import com.bh.planners.core.pojo.data.Data
 import com.germ.germplugin.api.GermPacketAPI
 import com.germ.germplugin.api.HudMessageType
 import com.germ.germplugin.api.KeyType
 import com.germ.germplugin.api.event.GermKeyDownEvent
 import com.github.sword.sword.config
 import com.github.sword.sword.parse
+import fr.xephi.authme.events.LoginEvent
+import org.bukkit.event.player.PlayerJoinEvent
 import taboolib.common.platform.event.SubscribeEvent
+import taboolib.common5.Coerce
 
 object getSkill {
     var sk = false
@@ -55,15 +62,23 @@ object getSkill {
     }
 
     @SubscribeEvent
+    fun join(e: LoginEvent) {
+        sk = false
+        ContextAPI.create(e.player, "和平模式", 1)?.cast()
+    }
+
+    @SubscribeEvent
     fun e(e: GermKeyDownEvent) {
         val key = e.keyType
         val player = e.player
         if (key == KeyType.KEY_R && !sk) {
             GermPacketAPI.sendHudMessage(player, HudMessageType.LEFT1, config.getString("skill-mode-title1"))
             sk = true
+            ContextAPI.create(player, "战斗模式", 1)?.cast()
         } else if (key == KeyType.KEY_R) {
             GermPacketAPI.sendHudMessage(player, HudMessageType.LEFT1, config.getString("skill-mode-title2"))
             sk = false
+            ContextAPI.create(player, "和平模式", 1)?.cast()
         }
     }
 }

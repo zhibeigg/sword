@@ -20,7 +20,7 @@ taboolib {
     install("expansion-command-helper")
     install("expansion-player-database")
     classifier = null
-    version = "6.0.10-16"
+    version = "6.0.10-22"
 
     description {
         contributors {
@@ -39,6 +39,7 @@ taboolib {
             name("Kingdoms").optional(true)
             name("MyPet").optional(true)
             name("MiraiMC").optional(true)
+            name("MythicMobs").optional(true)
         }
     }
 }

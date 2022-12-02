@@ -20,6 +20,8 @@ object stopDamage {
                     }
                 }
                 if (allow) e.isCancelled = true else return
+            } else {
+                e.isCancelled = true
             }
         }
     }

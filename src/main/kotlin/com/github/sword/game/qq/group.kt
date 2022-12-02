@@ -1,5 +1,9 @@
 package com.github.sword.game.qq
 
+import com.Zrips.CMI.CMI
+import com.Zrips.CMI.Containers.CMIUser
+import com.bh.planners.api.PlannersAPI.plannersProfile
+import com.github.sword.game.bukkit.getlevel
 import com.github.sword.sword.config
 import com.github.sword.sword.debug
 import me.clip.placeholderapi.PlaceholderAPI
@@ -8,6 +12,7 @@ import me.dreamvoid.miraimc.bukkit.event.bot.MiraiBotOnlineEvent
 import me.dreamvoid.miraimc.bukkit.event.message.passive.MiraiGroupMessageEvent
 import org.bukkit.Bukkit
 import org.bukkit.Bukkit.getOnlinePlayers
+import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.server.PluginDisableEvent
@@ -21,6 +26,7 @@ object group {
     fun e(e: MiraiBotOnlineEvent) {
         bot = e.bot
     }
+
 
     @SubscribeEvent
     fun join(e: PlayerJoinEvent) {
@@ -47,9 +53,13 @@ object group {
             debug("进入在线玩家1" + e.message)
             if (e.message == config.getString("在线玩家")) {
                 debug("进入在线玩家2")
-                var playerlist = "在线玩家:"
+                if (getOnlinePlayers().isEmpty()) {
+                    bot!!.getGroup(config.getLong("qq")).sendMessage("压根没人玩~~拉胯")
+                    return
+                }
+                var playerlist = "┏在线玩家┓"
                 getOnlinePlayers().map {
-                    playerlist = playerlist + it.displayName + "|"
+                    playerlist = playerlist + "\n" + it.displayName
                     debug(it.displayName)
                 }
                 bot!!.getGroup(config.getLong("qq")).sendMessage(playerlist)
@@ -58,19 +68,38 @@ object group {
     }
 
     @SubscribeEvent
-    fun money(e: MiraiGroupMessageEvent) {
+    fun find(e: MiraiGroupMessageEvent) {
         if (!config.getBoolean("qq-money")) return
         val message = e.message
-        if (message.contains(config.getString("查询") ?: "#查询")) {
-            val player = message.removePrefix(config.getString("查询") ?: "#查询")
+        if (message.contains(config.getString("查询") ?: "#查询 ")) {
+            val player = message.removePrefix(config.getString("查询") ?: "#查询 ")
             debug(player)
-            val sender = Bukkit.getPlayer(player)
+            val sender = CMI.getInstance().playerManager.getUser(player)
             if (sender != null) {
-                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage(config.getString("查询消息")?.let { PlaceholderAPI.setPlaceholders(sender, it) })
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage(papi(config.getString("查询消息"), sender))
             } else {
-                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("未能查询到在线玩家，格式${config.getString("查询") ?: "#查询"}player")
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("未能查询到玩家，格式\n${config.getString("查询") ?: "#查询"}player")
             }
         }
+    }
+
+    fun papi(message: String?, sender: CMIUser) : String? {
+        return message?.replace("%job%", getjob(sender.player))?.replace("%money%", getmoney(sender))?.replace("%level%", getlevel(sender))?.replace("%name%", sender.displayName)
+            ?.let { PlaceholderAPI.setPlaceholders(sender.player, it) }
+    }
+
+    fun getjob(player: Player) : String {
+        val job = player.plannersProfile.job?.name
+        return job ?: "无职业"
+    }
+
+    fun getmoney(player: CMIUser) : String {
+        val money = player.balance.toInt().toString()
+        return if (player.hasMoney(0.0)) money else "没钱"
+    }
+
+    fun getlevel(player: CMIUser) :String {
+        return player.level.toString()
     }
 
     @SubscribeEvent
@@ -97,4 +126,5 @@ object group {
         if (e.message == "#map" || e.message == "#地图") MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("map.mcwar.cn")
         if (e.message == "#官网" || e.message == "#web") MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("www.mcwar.cn")
     }
+
 }

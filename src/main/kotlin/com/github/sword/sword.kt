@@ -44,6 +44,7 @@ object sword : Plugin() {
         enable("Kingdoms")
         enable("MyPet")
         enable("MiraiMC")
+        enable("MythicMobs")
     }
 
     override fun onDisable() {
