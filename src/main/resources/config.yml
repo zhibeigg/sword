@@ -116,9 +116,15 @@ qq-money: true
 # 是否开启服务器关闭提示
 关闭提醒: true
 关闭消息: "服务器已关闭 游玩请稍作等候"
+# 是否开启国家查询
+qq-kingdoms: true
+国家查询: "#王国 "
+国家信息: "国家：%name%\n国王：%king%\n银行：%money%\n资源点：%points%\n威望：%power%\n土地：%lands%/%max_lands%\n成员：%number%/%max_number%\n核心位置：X%x% Y%y% Z%z%"
+# 是否开启脏话管教
+qq-fuck: true
 # 是否开启帮助
 qq-help: true
-帮助消息: "#官网 #地图 #百科 #查询 #在线玩家"
+帮助消息: "#官网\n#地图\n#百科\n#查询 玩家\n#在线玩家\n#王国 名字"
 附魔信息: "§4| §c当前已禁止附魔台的使用"
 禁用附魔: true
 禁用放入附魔台: false

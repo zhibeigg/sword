@@ -17,9 +17,9 @@ object friend {
             val player = message.removePrefix(config.getString("查询") ?: "#查询 ")
             val sender = CMI.getInstance().playerManager.getUser(player)
             if (sender == null) {
-                MiraiBot.getBot(e.botID).getFriend(e.senderID).sendMessage("未能查询到玩家，格式\n${config.getString("查询") ?: "#查询"}player")
+                MiraiBot.getBot(e.botID).getFriend(e.senderID).sendMessage("未能查询到玩家，格式\n${config.getString("查询") ?: "#查询 "}player")
             } else {
-                MiraiBot.getBot(e.botID).getFriend(e.senderID).sendMessage(papi(config.getString("查询消息"), sender))
+                MiraiBot.getBot(e.botID).getFriend(e.senderID).sendMessage(papi(config.getString("查询消息"), sender)?.replace(Regex("§[0-9a-zA-Z]"), ""))
             }
         }
     }

@@ -2,20 +2,19 @@ package com.github.sword.game.qq
 
 import com.Zrips.CMI.CMI
 import com.Zrips.CMI.Containers.CMIUser
-import com.bh.planners.api.PlannersAPI.plannersProfile
-import com.github.sword.game.bukkit.getlevel
 import com.github.sword.sword.config
 import com.github.sword.sword.debug
 import me.clip.placeholderapi.PlaceholderAPI
 import me.dreamvoid.miraimc.api.MiraiBot
 import me.dreamvoid.miraimc.bukkit.event.bot.MiraiBotOnlineEvent
 import me.dreamvoid.miraimc.bukkit.event.message.passive.MiraiGroupMessageEvent
-import org.bukkit.Bukkit
 import org.bukkit.Bukkit.getOnlinePlayers
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.server.PluginDisableEvent
+import org.kingdoms.constants.group.Kingdom
+import org.kingdoms.main.Kingdoms
 import taboolib.common.platform.event.SubscribeEvent
 
 object group {
@@ -68,6 +67,38 @@ object group {
     }
 
     @SubscribeEvent
+    fun kingdoms(e: MiraiGroupMessageEvent) {
+        if (!config.getBoolean("qq-kingdoms")) return
+        val message = e.message
+        if (message.contains(config.getString("国家查询") ?: "#王国 ")) {
+            val name = message.removePrefix(config.getString("国家查询") ?: "#王国 ")
+            debug(name)
+            val var1 = Kingdom.getKingdom(name)
+            debug(var1.toString())
+            if (var1 != null) {
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage(kingdommessage(var1) ?: "未能查询到国家，格式\n${config.getString("国家查询") ?: "#王国 "}kingdom")
+            } else {
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("未能查询到国家，格式\n${config.getString("国家查询") ?: "#王国 "}kingdom")
+            }
+        }
+    }
+
+    fun kingdommessage(kingdom: Kingdom) : String? {
+        return config.getString("国家信息")
+            ?.replace("%name%", kingdom.name)
+            ?.replace("%king%", kingdom.king.player.displayName)
+            ?.replace("%money%", kingdom.bank.toInt().toString())
+            ?.replace("%points%", kingdom.resourcePoints.toString())
+            ?.replace("%lands%", kingdom.lands.toString())
+            ?.replace("%max_lands%", kingdom.maxLands.toString())
+            ?.replace("%number%", kingdom.members.size.toString())
+            ?.replace("%max_number%", kingdom.maxMembers.toString())
+            ?.replace("x", kingdom.nexus.x.toString())
+            ?.replace("y", kingdom.nexus.y.toString())
+            ?.replace("z", kingdom.nexus.z.toString())
+    }
+
+    @SubscribeEvent
     fun find(e: MiraiGroupMessageEvent) {
         if (!config.getBoolean("qq-money")) return
         val message = e.message
@@ -76,21 +107,24 @@ object group {
             debug(player)
             val sender = CMI.getInstance().playerManager.getUser(player)
             if (sender != null) {
-                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage(papi(config.getString("查询消息"), sender))
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage(papi(config.getString("查询消息"), sender)?.replace(Regex("§[0-9a-zA-Z]"), ""))
             } else {
-                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("未能查询到玩家，格式\n${config.getString("查询") ?: "#查询"}player")
+                MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("未能查询到玩家，格式\n${config.getString("查询") ?: "#查询 "}player")
             }
         }
     }
 
     fun papi(message: String?, sender: CMIUser) : String? {
-        return message?.replace("%job%", getjob(sender.player))?.replace("%money%", getmoney(sender))?.replace("%level%", getlevel(sender))?.replace("%name%", sender.displayName)
+        return message
+            ?.replace("%job%", getjob(sender.player))
+            ?.replace("%money%", getmoney(sender))
+            ?.replace("%level%", getlevel(sender))
+            ?.replace("%name%", sender.displayName)
             ?.let { PlaceholderAPI.setPlaceholders(sender.player, it) }
     }
 
     fun getjob(player: Player) : String {
-        val job = player.plannersProfile.job?.name
-        return job ?: "无职业"
+        return "数据未提供"
     }
 
     fun getmoney(player: CMIUser) : String {
@@ -126,5 +160,19 @@ object group {
         if (e.message == "#map" || e.message == "#地图") MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("map.mcwar.cn")
         if (e.message == "#官网" || e.message == "#web") MiraiBot.getBot(e.botID).getGroup(e.groupID).sendMessage("www.mcwar.cn")
     }
+
+    @SubscribeEvent
+    fun fuck(e: MiraiGroupMessageEvent) {
+        if (!config.getBoolean("qq-fuck")) return
+        val bot = MiraiBot.getBot(e.botID)
+        if (e.message.contains("傻逼")) {
+            bot.getGroup(e.groupID).sendMessage("不准说脏话哟")
+            debug(bot.getGroup(e.groupID).getMember(e.senderID).permission.toString())
+            if (bot.getGroup(e.groupID).getMember(e.senderID).permission < 1) {
+                bot.getGroup(e.groupID).getMember(e.senderID).setMute(1)
+            }
+        }
+    }
+
 
 }
